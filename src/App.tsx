@@ -1,14 +1,13 @@
 import Navbar from "./components/Navbar";
+import Hero from "./sections/Hero";
 
 function App() {
   return (
     <main id="home">
       <Navbar />
 
-      <section>
-        <h1>Hi, Ashwin here.</h1>
-      </section>
-      
+      <Hero />
+
     </main>
   );
 }

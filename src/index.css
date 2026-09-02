@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+:root {
+    --bg: #06141B;
+    --text: #CCD0CF;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    background-color: var(--bg);
+    color: var(--text);
+}
