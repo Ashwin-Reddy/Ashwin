@@ -7,13 +7,15 @@ const About = () => {
       id="about"
       className="px-6 py-32 md:py-40"
     >
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-14 md:flex-row md:gap-20">
+      <div className="mx-auto flex max-w-4xl flex-col items-center gap-14 md:flex-row md:gap-20">
 
         {/* Image */}
         <motion.div
           className="w-full md:w-2/5"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
+          whileHover={{ scale: 1.1 }}
+
           viewport={{ once: true, amount: 0.25 }}
           transition={{
             duration: 0.8,
@@ -51,7 +53,7 @@ const About = () => {
             <div className="h-px w-full bg-[#CCD0CF]/20" />
           </div>
 
-          {/* Placeholder text */}
+          {/* text */}
           <p className="text-base leading-8 text-[#9BA8AB] md:text-lg">
             This is where a little bit about me will go. For now, this is
             placeholder text while we work on the structure, spacing,
