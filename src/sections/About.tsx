@@ -52,13 +52,13 @@ const About = () => {
           </div>
 
           {/* Placeholder text */}
-          <p className="text-base leading-8 text-[#CCD0CF]/70 md:text-lg">
+          <p className="text-base leading-8 text-[#9BA8AB] md:text-lg">
             This is where a little bit about me will go. For now, this is
             placeholder text while we work on the structure, spacing,
             typography, and overall visual design of the section.
           </p>
 
-          <p className="mt-6 text-base leading-8 text-[#CCD0CF]/70 md:text-lg">
+          <p className="mt-6 text-base leading-8 text-[#9BA8AB] md:text-lg">
             We'll replace this with something that talks about my journey,
             the things I build, the technologies I enjoy working with,
             and what keeps me curious about software.
@@ -66,7 +66,7 @@ const About = () => {
 
           {/* Technologies */}
           <div className="mt-8">
-            <p className="mb-5 text-base text-[#CCD0CF]/70 md:text-lg">
+            <p className="mb-5 text-base text-[#9BA8AB] md:text-lg">
               Some technologies I work with:
             </p>
 

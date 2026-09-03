@@ -2,7 +2,8 @@
 
 :root {
     --bg: #06141B;
-    --text: #CCD0CF;
+    --text-primary: #CCD0CF;
+    --text-secondary: #9BA8AB;
 }
 
 html {
@@ -13,5 +14,5 @@ body {
     margin: 0;
     min-width: 320px;
     background-color: var(--bg);
-    color: var(--text);
+    color: var(--text-primary);
 }

@@ -14,7 +14,7 @@ const Hero = () => {
                         Hi, Ashwin here.
                     </h1>
 
-                    <p className="mt-8 max-w-xl text-base leading-8 opacity-70 md:text-lg">
+                    <p className="mt-8 max-w-xl text-base leading-8 text-[#9BA8AB] md:text-lg">
                         Software engineer from India. I turn caffeine, curiosity, questionable ideas and terminal addiction into working software. Usually, it becomes a useful product. The rest becomes very educational bugs.
                     </p>
                 </div>
