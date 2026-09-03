@@ -10,7 +10,7 @@ const Navbar = () => {
           href="#home"
           className="text-xl font-semibold tracking-tight"
         >
-          Ashwin.
+          Ashwin<span className="text-[#3282b8]">.</span>
         </a>
 
         {/* Navigation */}

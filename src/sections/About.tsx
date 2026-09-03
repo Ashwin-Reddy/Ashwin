@@ -15,7 +15,6 @@ const About = () => {
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           whileHover={{ scale: 1.1 }}
-
           viewport={{ once: true, amount: 0.25 }}
           transition={{
             duration: 0.8,
@@ -69,13 +68,13 @@ const About = () => {
           {/* Technologies */}
           <div className="mt-8">
             <p className="mb-5 text-base text-[#9BA8AB] md:text-lg">
-              Some technologies I work with:
+              Here are some technologies I have been working with:
             </p>
 
             <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm text-[#CCD0CF]/60 md:max-w-md md:text-base">
               <div>▷ Python</div>
               <div>▷ TypeScript</div>
-              <div>▷ React</div>
+              <div>▷ React.js</div>
               <div>▷ Java</div>
               <div>▷ C++</div>
               <div>▷ FastAPI</div>

@@ -11,7 +11,7 @@ const Hero = () => {
                 {/* Text */}
                 <div className="w-1/2">
                     <h1 className="text-5xl font-medium tracking-tight md:text-6xl lg:text-7xl">
-                        Hi, Ashwin here.
+                        Hi, <span className="text-[#3282b8]"> Ashwin</span> here.
                     </h1>
 
                     <p className="mt-8 max-w-xl text-base leading-8 text-[#9BA8AB] md:text-lg">
