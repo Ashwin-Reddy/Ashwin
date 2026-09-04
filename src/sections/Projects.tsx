@@ -1,59 +1,47 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
 
 import projects from "../data/projects.json";
 
 type Project = {
   name: string;
+  description: string;
   technologies: string[];
   startDate: string;
   endDate: string;
   github: string;
 };
 
-const projects: Project[] = [
-  {
-    name: "AI Resume Screener",
-    technologies: ["Python", "FastAPI", "React", "PostgreSQL"],
-    startDate: "MMM 2025",
-    endDate: "MMM 2025",
-    github: "https://github.com/yourusername/ai-resume-screener",
-  },
-  {
-    name: "TITAN Chatbot",
-    technologies: ["Python", "NLP", "Speech Recognition"],
-    startDate: "MMM 2024",
-    endDate: "MMM 2024",
-    github: "https://github.com/Ashwin-Reddy/TITAN-chatbot",
-  },
-  {
-    name: "Project KISAN",
-    technologies: ["Python", "SQL", "Machine Learning"],
-    startDate: "MMM 2024",
-    endDate: "MMM 2024",
-    github: "https://github.com/Ashwin-Reddy/Project-KISAN",
-  },
-  {
-    name: "AI Fitness Coach",
-    technologies: ["React Native", "FastAPI", "PostgreSQL"],
-    startDate: "MMM 2025",
-    endDate: "MMM 2025",
-    github: "https://github.com/yourusername/ai-fitness-coach",
-  },
-];
+const typedProjects = projects as Project[];
 
 const Projects = () => {
-  const projectCount = projects.length;
+  const projectCount = typedProjects.length;
 
-  // Start in the middle copy so we can move infinitely in either direction.
+  /*
+   * We render three copies of the projects:
+   *
+   * [A B C D] [A B C D] [A B C D]
+   *
+   * We start in the middle copy.
+   */
+  const extendedProjects = [
+    ...typedProjects,
+    ...typedProjects,
+    ...typedProjects,
+  ];
+
   const [activeIndex, setActiveIndex] = useState(projectCount);
 
-  const extendedProjects = [
-    ...projects,
-    ...projects,
-    ...projects,
-  ];
+  /*
+   * Used when silently moving from a cloned project
+   * back to the equivalent project in the middle copy.
+   */
+  const [isResetting, setIsResetting] = useState(false);
 
   const nextProject = () => {
     setActiveIndex((current) => current + 1);
@@ -64,8 +52,7 @@ const Projects = () => {
   };
 
   /*
-   * Automatically move the carousel every 5 seconds.
-   * The user can still manually control it using the arrows.
+   * Automatic scrolling.
    */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,22 +63,48 @@ const Projects = () => {
   }, []);
 
   /*
-   * When we reach either end of the duplicated array,
-   * silently jump back to the middle copy.
+   * Handle the infinite loop.
+   *
+   * Once we've animated into the third copy,
+   * silently jump back to the equivalent position
+   * in the middle copy.
    */
   useEffect(() => {
     if (activeIndex >= projectCount * 2) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
+        setIsResetting(true);
         setActiveIndex((current) => current - projectCount);
-      }, 500);
+      }, 520);
+
+      return () => clearTimeout(timeout);
     }
 
+    /*
+     * Same thing when scrolling backwards.
+     */
     if (activeIndex < projectCount) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
+        setIsResetting(true);
         setActiveIndex((current) => current + projectCount);
-      }, 500);
+      }, 520);
+
+      return () => clearTimeout(timeout);
     }
   }, [activeIndex, projectCount]);
+
+  /*
+   * After the invisible repositioning has happened,
+   * turn animations back on for the next movement.
+   */
+  useEffect(() => {
+    if (!isResetting) return;
+
+    const timeout = setTimeout(() => {
+      setIsResetting(false);
+    }, 50);
+
+    return () => clearTimeout(timeout);
+  }, [isResetting]);
 
   return (
     <section
@@ -111,16 +124,20 @@ const Projects = () => {
       <div className="relative mx-auto max-w-7xl">
 
         {/* Cards viewport */}
-        <div className="overflow-hidden px-4 py-8">
+        <div className="overflow-hidden px-4 py-10">
           <motion.div
             className="flex items-center"
             animate={{
               x: `calc(50% - ${activeIndex * 336}px - 168px)`,
             }}
-            transition={{
-              duration: 0.5,
-              ease: "easeInOut",
-            }}
+            transition={
+              isResetting
+                ? { duration: 0 }
+                : {
+                    duration: 0.5,
+                    ease: "easeInOut",
+                  }
+            }
           >
             {extendedProjects.map((project, index) => {
               const isActive = index === activeIndex;
@@ -128,6 +145,7 @@ const Projects = () => {
               return (
                 <motion.div
                   key={`${project.name}-${index}`}
+                  className="w-[300px] shrink-0 px-3 md:w-[336px]"
                   animate={{
                     scale: isActive ? 1.08 : 0.92,
                     opacity: isActive ? 1 : 0.55,
@@ -136,12 +154,11 @@ const Projects = () => {
                     duration: 0.5,
                     ease: "easeOut",
                   }}
-                  className="w-[300px] shrink-0 px-3 md:w-[336px]"
                 >
                   <div
                     className={`
-                      flex h-[330px] flex-col rounded-2xl border
-                      p-7 transition-colors duration-500
+                      flex h-[350px] flex-col rounded-2xl border p-7
+                      transition-colors duration-500
                       ${
                         isActive
                           ? "border-[#CCD0CF]/30 bg-[#0B1C24]"
@@ -149,21 +166,28 @@ const Projects = () => {
                       }
                     `}
                   >
-                    {/* Project name */}
+                    {/* Project name + date */}
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="text-xl font-semibold leading-snug text-[#CCD0CF]">
                         {project.name}
                       </h3>
 
-                      <span className="shrink-0 text-xs text-[#9BA8AB]">
-                        {project.startDate}
-                        <br />
-                        {project.endDate}
-                      </span>
+                      <div className="shrink-0 text-right text-xs leading-5 text-[#9BA8AB]">
+                        <div>{project.startDate}</div>
+                        <div>{project.endDate}</div>
+                      </div>
                     </div>
 
+                    {/* Description */}
+                    <p
+                      className="mt-5 truncate whitespace-nowrap text-sm leading-6 text-[#9BA8AB]"
+                      title={project.description}
+                    >
+                      {project.description}
+                    </p>
+
                     {/* Technologies */}
-                    <div className="mt-8 flex flex-wrap gap-2">
+                    <div className="mt-7 flex flex-wrap gap-2">
                       {project.technologies.map((technology) => (
                         <span
                           key={technology}
@@ -174,10 +198,10 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    {/* Spacer */}
+                    {/* Push link to bottom */}
                     <div className="flex-1" />
 
-                    {/* GitHub link */}
+                    {/* GitHub */}
                     <a
                       href={project.github}
                       target="_blank"
@@ -194,19 +218,46 @@ const Projects = () => {
           </motion.div>
         </div>
 
-        {/* Navigation arrows */}
+        {/* Previous */}
         <button
+          type="button"
           onClick={previousProject}
           aria-label="Previous project"
-          className="absolute left-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#CCD0CF]/20 bg-[#06141B] text-[#CCD0CF] transition-all duration-300 hover:border-[#CCD0CF]/50 hover:bg-[#CCD0CF] hover:text-[#06141B]"
+          className="
+            absolute left-0 top-1/2
+            flex h-11 w-11 -translate-y-1/2
+            items-center justify-center
+            rounded-full
+            border border-[#CCD0CF]/20
+            bg-[#06141B]
+            text-[#CCD0CF]
+            transition-all duration-300
+            hover:border-[#CCD0CF]/50
+            hover:bg-[#CCD0CF]
+            hover:text-[#06141B]
+          "
         >
           <ArrowLeft size={18} />
         </button>
 
+        {/* Next */}
         <button
+          type="button"
           onClick={nextProject}
           aria-label="Next project"
-          className="absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[#CCD0CF]/20 bg-[#06141B] text-[#CCD0CF] transition-all duration-300 hover:border-[#CCD0CF]/50 hover:bg-[#CCD0CF] hover:text-[#06141B]"
+          className="
+            absolute right-0 top-1/2
+            flex h-11 w-11 -translate-y-1/2
+            items-center justify-center
+            rounded-full
+            border border-[#CCD0CF]/20
+            bg-[#06141B]
+            text-[#CCD0CF]
+            transition-all duration-300
+            hover:border-[#CCD0CF]/50
+            hover:bg-[#CCD0CF]
+            hover:text-[#06141B]
+          "
         >
           <ArrowRight size={18} />
         </button>
