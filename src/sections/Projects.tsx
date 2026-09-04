@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
+import projects from "../data/projects.json";
+
 type Project = {
   name: string;
   technologies: string[];

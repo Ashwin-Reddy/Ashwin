@@ -1,0 +1,51 @@
+[
+  {
+    "name": "AI Resume Screener",
+    "description": "Semantic resume-to-job matching using transformer embeddings.",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "React",
+      "PostgreSQL"
+    ],
+    "startDate": "Mar 2025",
+    "endDate": "Sep 2025",
+    "github": "https://github.com/yourusername/ai-resume-screener"
+  },
+  {
+    "name": "TITAN Chatbot",
+    "description": "A voice-enabled AI assistant built with Python and NLP.",
+    "technologies": [
+      "Python",
+      "NLP",
+      "Speech Recognition"
+    ],
+    "startDate": "Jan 2024",
+    "endDate": "Apr 2024",
+    "github": "https://github.com/Ashwin-Reddy/TITAN-chatbot"
+  },
+  {
+    "name": "Project KISAN",
+    "description": "A smart farming system designed to assist farmers with data-driven insights.",
+    "technologies": [
+      "Python",
+      "SQL",
+      "Machine Learning"
+    ],
+    "startDate": "Jun 2024",
+    "endDate": "Oct 2024",
+    "github": "https://github.com/Ashwin-Reddy/Project-KISAN"
+  },
+  {
+    "name": "AI Fitness Coach",
+    "description": "An intelligent fitness assistant for tracking and personalized guidance.",
+    "technologies": [
+      "React Native",
+      "FastAPI",
+      "PostgreSQL"
+    ],
+    "startDate": "Jan 2025",
+    "endDate": "May 2025",
+    "github": "https://github.com/yourusername/ai-fitness-coach"
+  }
+]
