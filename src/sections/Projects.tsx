@@ -51,9 +51,8 @@ const Projects = () => {
     setActiveIndex((current) => current - 1);
   };
 
-  /*
-   * Automatic scrolling.
-   */
+  /* Automatic scrolling.*/
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => current + 1);
@@ -171,16 +170,15 @@ const Projects = () => {
                       <h3 className="text-xl font-semibold leading-snug text-[#CCD0CF]">
                         {project.name}
                       </h3>
+                    </div>
 
-                      <div className="shrink-0 text-right text-xs leading-5 text-[#9BA8AB]">
-                        <div>{project.startDate}</div>
-                        <div>{project.endDate}</div>
-                      </div>
+                    <div className="shrink-0 text-right text-xs leading-5 text-[#9BA8AB]">
+                      <div>{project.startDate} - {project.endDate}</div>
                     </div>
 
                     {/* Description */}
                     <p
-                      className="mt-5 truncate whitespace-nowrap text-sm leading-6 text-[#9BA8AB]"
+                      className="mt-5 text-sm leading-6 text-[#9BA8AB]"
                       title={project.description}
                     >
                       {project.description}
