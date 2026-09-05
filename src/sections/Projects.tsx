@@ -116,7 +116,7 @@ const Projects = () => {
           / projects
         </h2>
 
-        <div className="h-px w-full bg-[#CCD0CF]/20" />
+        <div className="flex-1 border-t border-[#CCD0CF]/20" />
       </div>
 
       {/* Carousel */}
@@ -160,8 +160,8 @@ const Projects = () => {
                       transition-colors duration-500
                       ${
                         isActive
-                          ? "border-[#CCD0CF]/30 bg-[#0B1C24]"
-                          : "border-[#CCD0CF]/10 bg-[#081922]"
+                          ? "border-[#CCD0CF]/60 bg-[#11212D]"
+                          : "border-[#CCD0CF]/10 bg-[#11212D]"
                       }
                     `}
                   >
@@ -185,7 +185,7 @@ const Projects = () => {
                     </p>
 
                     {/* Technologies */}
-                    <div className="mt-7 flex flex-wrap gap-2">
+                    <div className="mt-10 flex flex-wrap gap-2">
                       {project.technologies.map((technology) => (
                         <span
                           key={technology}
