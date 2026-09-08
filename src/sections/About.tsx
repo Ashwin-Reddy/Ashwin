@@ -59,25 +59,34 @@ const About = () => {
             typography, and overall visual design of the section.
           </p>
 
-          <p className="mt-6 text-base leading-8 text-[#9BA8AB] md:text-lg">
-            We'll replace this with something that talks about my journey,
-            the things I build, the technologies I enjoy working with,
-            and what keeps me curious about software.
-          </p>
-
           {/* Technologies */}
           <div className="mt-8">
             <p className="mb-5 text-base text-[#9BA8AB] md:text-lg">
               Here are some technologies I have been working with:
             </p>
 
-            <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm text-[#CCD0CF]/60 md:max-w-md md:text-base">
-              <div>▷ Python</div>
-              <div>▷ TypeScript</div>
-              <div>▷ React.js</div>
-              <div>▷ Java</div>
-              <div>▷ C++</div>
-              <div>▷ FastAPI</div>
+            <div className="whitespace-nowrap grid grid-cols-3 gap-x-10 gap-y-4 text-sm text-[#CCD0CF]/60 md:max-w-md md:text-base">
+              <div>PROJECTS BUILT</div>
+              <div>:</div>
+              <div>07</div>
+              <div>LANGUAGES USED</div>
+              <div>:</div>
+              <div>08</div>
+              <div>COFFEE CONSUMED</div>
+              <div>:</div>
+              <div>∞</div>
+              <div>TERMINAL TABS</div>
+              <div>:</div>
+              <div>27</div>
+              <div>BUGS CREATED</div>
+              <div>:</div>
+              <div>???</div>
+              <div>BUGS FIXED</div>
+              <div>:</div>
+              <div>Eventually</div>
+              <div>CURRENT STATUS</div>
+              <div>:</div>
+              <div>BUILDING</div>
             </div>
           </div>
 
