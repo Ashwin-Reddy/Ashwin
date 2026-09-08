@@ -54,14 +54,13 @@ const About = () => {
 
           {/* text */}
           <p className="text-base leading-8 text-[#9BA8AB] md:text-lg">
-            This is where a little bit about me will go. For now, this is
-            placeholder text while we work on the structure, spacing,
-            typography, and overall visual design of the section.
+            I build software that solves real problems, explore AI and enjoy 
+            understanding what happens under the hood. When I'm not building, I'm wondering what to build next.
           </p>
 
           {/* Technologies */}
           <div className="mt-8">
-            <p className="mb-5 mx-12 text-base text-[#9BA8AB] md:text-lg underline">
+            <p className="mb-5 mx-12 text-base text-[#CCD0CF] md:text-xl underline">
               Developer Stats
             </p>
 
