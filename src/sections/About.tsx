@@ -61,32 +61,54 @@ const About = () => {
 
           {/* Technologies */}
           <div className="mt-8">
-            <p className="mb-5 text-base text-[#9BA8AB] md:text-lg">
-              Here are some technologies I have been working with:
+            <p className="mb-5 mx-12 text-base text-[#9BA8AB] md:text-lg underline">
+              Developer Stats
             </p>
 
-            <div className="whitespace-nowrap grid grid-cols-3 gap-x-10 gap-y-4 text-sm text-[#CCD0CF]/60 md:max-w-md md:text-base">
-              <div>PROJECTS BUILT</div>
-              <div>:</div>
-              <div>07</div>
-              <div>LANGUAGES USED</div>
-              <div>:</div>
-              <div>08</div>
-              <div>COFFEE CONSUMED</div>
-              <div>:</div>
-              <div>∞</div>
-              <div>TERMINAL TABS</div>
-              <div>:</div>
-              <div>27</div>
-              <div>BUGS CREATED</div>
-              <div>:</div>
-              <div>???</div>
-              <div>BUGS FIXED</div>
-              <div>:</div>
-              <div>Eventually</div>
-              <div>CURRENT STATUS</div>
-              <div>:</div>
-              <div>BUILDING</div>
+            <div className="max-w-md space-y-4 text-sm text-[#9BA8AB] md:text-base">
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>PROJECTS BUILT</span>
+                <span>:</span>
+                <span>07</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>LANGUAGES USED</span>
+                <span>:</span>
+                <span>08</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>COFFEE CONSUMED</span>
+                <span>:</span>
+                <span>∞</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>TERMINAL TABS</span>
+                <span>:</span>
+                <span>27</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>BUGS CREATED</span>
+                <span>:</span>
+                <span>???</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>BUGS FIXED</span>
+                <span>:</span>
+                <span>Eventually</span>
+              </div>
+
+              <div className="grid grid-cols-[170px_16px_1fr]">
+                <span>CURRENT STATUS</span>
+                <span>:</span>
+                <span>BUILDING</span>
+              </div>
+
             </div>
           </div>
 
