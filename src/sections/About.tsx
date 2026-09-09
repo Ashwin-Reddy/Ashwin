@@ -85,9 +85,9 @@ const About = () => {
               </div>
 
               <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>TERMINAL TABS</span>
+                <span>LEETCODE VISITS</span>
                 <span>:</span>
-                <span>27</span>
+                <span>Lost track</span>
               </div>
 
               <div className="grid grid-cols-[170px_16px_1fr]">
