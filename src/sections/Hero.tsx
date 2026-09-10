@@ -1,4 +1,4 @@
-import heroImage from "../assets/images/hero.jpg"
+import heroImage from "../assets/images/hero.png"
 
 const Hero = () => {
     return (
@@ -24,7 +24,7 @@ const Hero = () => {
                     <img
                         src={heroImage}
                         alt="Ashwin"
-                        className="h-auto max-w-md object-contain"
+                        className="h-130 max-w-md object-contain"
                     />
                 </div>
             </div>
