@@ -60,55 +60,18 @@ const About = () => {
 
           {/* Technologies */}
           <div className="mt-8">
-            <p className="mb-5 mx-12 text-base text-[#CCD0CF] md:text-xl underline">
-              Developer Stats
+            <p className="mb-5 text-base text-[#9BA8AB] md:text-lg">
+              Here are some technologies I have been working with:
             </p>
 
-            <div className="max-w-md space-y-4 text-sm text-[#9BA8AB] md:text-base">
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>PROJECTS BUILT</span>
-                <span>:</span>
-                <span>07</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>LANGUAGES USED</span>
-                <span>:</span>
-                <span>08</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>COFFEE CONSUMED</span>
-                <span>:</span>
-                <span>∞</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>LEETCODE VISITS</span>
-                <span>:</span>
-                <span>Lost track</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>BUGS CREATED</span>
-                <span>:</span>
-                <span>???</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>BUGS FIXED</span>
-                <span>:</span>
-                <span>Eventually</span>
-              </div>
-
-              <div className="grid grid-cols-[170px_16px_1fr]">
-                <span>CURRENT STATUS</span>
-                <span>:</span>
-                <span>BUILDING</span>
-              </div>
-
+            <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm text-[#9BA8AB] md:max-w-md md:text-base">
+              <div><span className="text-[#3282b8]">▷</span> Python</div>
+              <div>▷ Java</div>
+              <div>▷ PostgreSQL</div>
+              <div>▷ C++</div>
+              <div>▷ React.js</div>
             </div>
+
           </div>
 
         </motion.div>
