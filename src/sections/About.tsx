@@ -65,11 +65,11 @@ const About = () => {
             </p>
 
             <div className="grid grid-cols-2 gap-x-10 gap-y-3 text-sm text-[#9BA8AB] md:max-w-md md:text-base">
-              <div><span className="text-[#3282b8]">▷</span> Python</div>
-              <div>▷ Java</div>
-              <div>▷ PostgreSQL</div>
-              <div>▷ C++</div>
-              <div>▷ React.js</div>
+              <div><span className="text-[#64ffda]">▷</span> Python</div>
+              <div><span className="text-[#64ffda]">▷</span> Java</div>
+              <div><span className="text-[#64ffda]">▷</span> PostgreSQL</div>
+              <div><span className="text-[#64ffda]">▷</span> C++</div>
+              <div><span className="text-[#64ffda]">▷</span> React.js</div>
             </div>
 
           </div>
