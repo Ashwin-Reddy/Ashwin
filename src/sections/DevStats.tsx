@@ -55,9 +55,9 @@ const DevStats = () => {
                         </div>
 
                         <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                            <span>TERMINAL TABS</span>
+                            <span>LEETCODE VISITS</span>
                             <span className="text-[#CCD0CF]/50">:</span>
-                            <span className="font-medium text-[#CCD0CF]">27</span>
+                            <span className="font-medium text-[#CCD0CF]">Lost Track</span>
                         </div>
 
                         <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">

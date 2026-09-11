@@ -29,6 +29,13 @@ const Navbar = () => {
             About
           </a>
 
+          <a 
+            href="#devstats"
+            className="text-sm transition-opacity hover:opacity-60"
+          >
+            Stats
+          </a>
+
           <a
             href="#projects"
             className="text-sm transition-opacity hover:opacity-60"
