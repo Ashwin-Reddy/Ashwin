@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Projects from "./sections/Projects";
+import DevStats from "./sections/DevStats";
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
       <Hero />
 
       <About />
+
+      <DevStats />
 
       <Projects />
 
