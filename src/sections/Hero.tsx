@@ -6,7 +6,7 @@ const Hero = () => {
             id="home"
             className="min-h-[calc(100vh-80px)] px-6"
         >
-            <div className="mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl items-center">
+            <div className="mx-auto flex min-h-[calc(110vh-80px)] max-w-7xl items-center">
 
                 {/* Text */}
                 <div className="w-1/2">

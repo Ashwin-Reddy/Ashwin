@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "devstats", label: "Stats" },
+  { id: "projects", label: "Projects" },
+];
+
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const aboutSection = document.getElementById("about");
@@ -24,6 +32,39 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const sectionElements = sections
+      .map((section) => document.getElementById(section.id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio
+          );
+
+        if (visibleSections.length > 0) {
+          setActiveSection(visibleSections[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    sectionElements.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <nav
       className={`
@@ -38,7 +79,7 @@ const Navbar = () => {
     >
       <div
         className={`
-          mx-auto flex max-w-7xl items-center justify-between
+          mx-auto flex max-w-6xl items-center justify-between
           px-0 py-5
           transition-all duration-300
           ${
@@ -61,38 +102,48 @@ const Navbar = () => {
           href="#home"
           className="text-xl font-semibold tracking-tight"
         >
-          Ashwin<span className="text-[#64ffda]">.</span>
+          Ashwin<span className="text-[#64ffdd]">.</span>
         </a>
 
         {/* Navigation */}
         <div className="hidden items-center gap-8 md:flex">
-          <a
-            href="#home"
-            className="text-sm transition-opacity hover:opacity-60"
-          >
-            Home
-          </a>
+          {sections.map((section) => {
+            const isActive = activeSection === section.id;
 
-          <a
-            href="#about"
-            className="text-sm transition-opacity hover:opacity-60"
-          >
-            About
-          </a>
+            return (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className={`
+                  flex items-center gap-2
+                  text-sm
+                  transition-all duration-300
+                  ${
+                    isActive
+                      ? "text-[#CCD0CF]"
+                      : "text-[#9BA8AB]"
+                  }
+                  hover:text-[#CCD0CF]
+                `}
+              >
+                {/* Active indicator */}
+                <span
+                  className={`
+                    h-1.5 w-1.5 rounded-full
+                    bg-[#64ffdd]
+                    transition-all duration-300
+                    ${
+                      isActive
+                        ? "scale-100 opacity-100"
+                        : "scale-0 opacity-0"
+                    }
+                  `}
+                />
 
-          <a
-            href="#devstats"
-            className="text-sm transition-opacity hover:opacity-60"
-          >
-            Stats
-          </a>
-
-          <a
-            href="#projects"
-            className="text-sm transition-opacity hover:opacity-60"
-          >
-            Projects
-          </a>
+                {section.label}
+              </a>
+            );
+          })}
         </div>
 
         {/* Social Links */}
