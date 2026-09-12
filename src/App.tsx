@@ -4,6 +4,7 @@ import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Projects from "./sections/Projects";
 import DevStats from "./sections/DevStats";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
       <DevStats />
 
       <Projects />
+
+      <Footer />
 
     </main>
   );
