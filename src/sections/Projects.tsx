@@ -19,13 +19,16 @@ type Project = {
 
 const typedProjects = projects as Project[];
 
+const CARD_WIDTH = 336;
+const AUTO_SCROLL_INTERVAL = 5000;
+
 const Projects = () => {
   const projectCount = typedProjects.length;
 
   /*
-   * We render three copies of the projects:
+   * Three copies allow us to create an infinite carousel:
    *
-   * [A B C D] [A B C D] [A B C D]
+   * [ A B C D E ] [ A B C D E ] [ A B C D E ]
    *
    * We start in the middle copy.
    */
@@ -36,64 +39,65 @@ const Projects = () => {
   ];
 
   const [activeIndex, setActiveIndex] = useState(projectCount);
-
-  /*
-   * Used when silently moving from a cloned project
-   * back to the equivalent project in the middle copy.
-   */
   const [isResetting, setIsResetting] = useState(false);
 
+  /*
+   * Move to next project.
+   */
   const nextProject = () => {
     setActiveIndex((current) => current + 1);
   };
 
+  /*
+   * Move to previous project.
+   */
   const previousProject = () => {
     setActiveIndex((current) => current - 1);
   };
 
-  /* Automatic scrolling.*/
-
+  /*
+   * Automatic scrolling.
+   */
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => current + 1);
-    }, 5000);
+    }, AUTO_SCROLL_INTERVAL);
 
     return () => clearInterval(interval);
   }, []);
 
   /*
-   * Handle the infinite loop.
+   * Infinite carousel reset.
    *
-   * Once we've animated into the third copy,
-   * silently jump back to the equivalent position
-   * in the middle copy.
+   * Once we move into the third copy,
+   * silently jump back to the middle copy.
    */
   useEffect(() => {
     if (activeIndex >= projectCount * 2) {
       const timeout = setTimeout(() => {
         setIsResetting(true);
         setActiveIndex((current) => current - projectCount);
-      }, 520);
+      }, 550);
 
       return () => clearTimeout(timeout);
     }
 
     /*
-     * Same thing when scrolling backwards.
+     * Same thing when moving backwards.
      */
     if (activeIndex < projectCount) {
       const timeout = setTimeout(() => {
         setIsResetting(true);
         setActiveIndex((current) => current + projectCount);
-      }, 520);
+      }, 550);
 
       return () => clearTimeout(timeout);
     }
   }, [activeIndex, projectCount]);
 
   /*
-   * After the invisible repositioning has happened,
-   * turn animations back on for the next movement.
+   * Turn animations back on after
+   * the invisible repositioning.
    */
   useEffect(() => {
     if (!isResetting) return;
@@ -119,44 +123,125 @@ const Projects = () => {
         <div className="flex-1 border-t border-[#CCD0CF]/20" />
       </div>
 
-      {/* Carousel */}
+      {/* Coverflow container */}
       <div className="relative mx-auto max-w-7xl">
 
-        {/* Cards viewport */}
-        <div className="overflow-hidden px-4 py-10">
+        {/* Carousel viewport */}
+        <div
+          className="
+            relative
+            h-[390px]
+            overflow-visible
+            [perspective:1200px]
+          "
+        >
           <motion.div
-            className="flex items-center"
+            className="
+              absolute
+              left-1/2
+              top-1/2
+              flex
+              h-[350px]
+              items-center
+            "
             animate={{
-              x: `calc(50% - ${activeIndex * 336}px - 168px)`,
+              x: `calc(-${activeIndex * CARD_WIDTH}px - ${CARD_WIDTH / 2}px)`,
+              y: "-50%",
             }}
             transition={
               isResetting
                 ? { duration: 0 }
                 : {
-                    duration: 0.5,
-                    ease: "easeInOut",
+                    duration: 0.55,
+                    ease: [0.22, 1, 0.36, 1],
                   }
             }
+            style={{
+              transformStyle: "preserve-3d",
+            }}
           >
             {extendedProjects.map((project, index) => {
-              const isActive = index === activeIndex;
+              const distance = index - activeIndex;
+              const absoluteDistance = Math.abs(distance);
+
+              /*
+               * How far the card is from the center.
+               */
+              const isActive = distance === 0;
+
+              /*
+               * Cards move closer together as they
+               * move away from the center.
+               */
+              const sideOffset = distance * -125;
+
+              /*
+               * Rotate cards inward.
+               */
+              const rotateY = distance * -32;
+
+              /*
+               * Make side cards slightly smaller.
+               */
+              const scale = Math.max(
+                0.78,
+                1 - absoluteDistance * 0.08
+              );
+
+              /*
+               * Fade cards as they move away
+               * from the center.
+               */
+              const opacity = Math.max(
+                0.2,
+                1 - absoluteDistance * 0.18
+              );
+
+              /* Blur inactive cards */
+              const blur = Math.min(
+                absoluteDistance * 2,
+                6
+              )
+
+              /*
+               * Keep cards closer to the front
+               * when they are near the center.
+               */
+              const zIndex = 20 - absoluteDistance;
 
               return (
                 <motion.div
                   key={`${project.name}-${index}`}
-                  className="w-[300px] shrink-0 px-3 md:w-[336px]"
+                  className="
+                    absolute
+                    left-0
+                    top-0
+                    w-[336px]
+                  "
                   animate={{
-                    scale: isActive ? 1.08 : 0.92,
-                    opacity: isActive ? 1 : 0.55,
+                    x: index * CARD_WIDTH + sideOffset,
+                    scale,
+                    opacity,
+                    rotateY,
+                    zIndex,
+                    filter: `blur(${blur}px)`,
                   }}
-                  transition={{
-                    duration: 0.5,
-                    ease: "easeOut",
+                  transition={
+                    isResetting
+                      ? { duration: 0 }
+                      : {
+                          duration: 0.55,
+                          ease: [0.22, 1, 0.36, 1],
+                        }
+                  }
+                  style={{
+                    transformStyle: "preserve-3d",
                   }}
                 >
                   <div
                     className={`
-                      flex h-[350px] flex-col rounded-2xl border p-7
+                      flex h-[350px] flex-col
+                      rounded-2xl border p-7
                       transition-colors duration-500
                       ${
                         isActive
@@ -165,15 +250,19 @@ const Projects = () => {
                       }
                     `}
                   >
-                    {/* Project name + date */}
+
+                    {/* Project name */}
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="text-xl font-semibold leading-snug text-[#CCD0CF]">
                         {project.name}
                       </h3>
                     </div>
 
+                    {/* Date */}
                     <div className="shrink-0 text-right text-xs leading-5 text-[#9BA8AB]">
-                      <div>{project.startDate} - {project.endDate}</div>
+                      <div>
+                        {project.startDate} - {project.endDate}
+                      </div>
                     </div>
 
                     {/* Description */}
@@ -189,7 +278,12 @@ const Projects = () => {
                       {project.technologies.map((technology) => (
                         <span
                           key={technology}
-                          className="rounded-full border border-[#CCD0CF]/10 px-3 py-1.5 text-xs text-[#9BA8AB]"
+                          className="
+                            rounded-full
+                            border border-[#CCD0CF]/10
+                            px-3 py-1.5
+                            text-xs text-[#9BA8AB]
+                          "
                         >
                           {technology}
                         </span>
@@ -204,11 +298,22 @@ const Projects = () => {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-fit items-center gap-2 text-sm text-[#9BA8AB] transition-colors duration-300 hover:text-[#CCD0CF]"
+                      className="
+                        inline-flex
+                        w-fit
+                        items-center
+                        gap-2
+                        text-sm
+                        text-[#9BA8AB]
+                        transition-colors
+                        duration-300
+                        hover:text-[#CCD0CF]
+                      "
                     >
                       <ExternalLink size={16} />
                       View Project
                     </a>
+
                   </div>
                 </motion.div>
               );
@@ -216,45 +321,65 @@ const Projects = () => {
           </motion.div>
         </div>
 
-        {/* Previous */}
+        {/* Previous button */}
         <button
           type="button"
           onClick={previousProject}
           aria-label="Previous project"
           className="
-            absolute left-0 top-1/2
-            flex h-11 w-11 -translate-y-1/2
-            items-center justify-center
+            absolute
+            left-2
+            top-1/2
+            z-30
+            flex
+            h-11
+            w-11
+            -translate-y-1/2
+            items-center
+            justify-center
             rounded-full
-            border border-[#CCD0CF]/20
+            border
+            border-[#CCD0CF]/20
             bg-[#06141B]
             text-[#CCD0CF]
-            transition-all duration-300
+            transition-all
+            duration-300
             hover:border-[#CCD0CF]/50
             hover:bg-[#CCD0CF]
             hover:text-[#06141B]
+            md:left-4
           "
         >
           <ArrowLeft size={18} />
         </button>
 
-        {/* Next */}
+        {/* Next button */}
         <button
           type="button"
           onClick={nextProject}
           aria-label="Next project"
           className="
-            absolute right-0 top-1/2
-            flex h-11 w-11 -translate-y-1/2
-            items-center justify-center
+            absolute
+            right-2
+            top-1/2
+            z-30
+            flex
+            h-11
+            w-11
+            -translate-y-1/2
+            items-center
+            justify-center
             rounded-full
-            border border-[#CCD0CF]/20
+            border
+            border-[#CCD0CF]/20
             bg-[#06141B]
             text-[#CCD0CF]
-            transition-all duration-300
+            transition-all
+            duration-300
             hover:border-[#CCD0CF]/50
             hover:bg-[#CCD0CF]
             hover:text-[#06141B]
+            md:right-4
           "
         >
           <ArrowRight size={18} />
