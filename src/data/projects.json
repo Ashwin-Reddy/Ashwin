@@ -1,51 +1,52 @@
 [
   {
     "name": "AI Resume Screener",
-    "description": "Semantic resume-to-job matching using transformer embeddings.",
+    "description": "AI-powered system that evaluates resumes against job descriptions using LLMs and semantic matching.",
     "technologies": [
       "Python",
       "FastAPI",
-      "React",
-      "PostgreSQL"
+      "React.js",
+      "Gemini API"
     ],
-    "startDate": "Mar 2025",
-    "endDate": "Sep 2025",
-    "github": "https://github.com/yourusername/ai-resume-screener"
+    "startDate": "Mar 2026",
+    "endDate": "Mar 2026",
+    "github": "https://github.com/Ashwin-Reddy/Resume-Screener"
   },
   {
-    "name": "TITAN Chatbot",
-    "description": "A voice-enabled AI assistant built with Python and NLP.",
+    "name": "AI Chatbot - TITAN",
+    "description": "Personal AI assistant chatbot with NLP and machine learning capabilities.",
     "technologies": [
       "Python",
       "NLP",
-      "Speech Recognition"
+      "Speech Recognition",
+      "Gemini API"
     ],
-    "startDate": "Jan 2024",
-    "endDate": "Apr 2024",
+    "startDate": "Mar 2025",
+    "endDate": "Jul 2025",
     "github": "https://github.com/Ashwin-Reddy/TITAN-chatbot"
   },
   {
     "name": "Project KISAN",
-    "description": "A smart farming system designed to assist farmers with data-driven insights.",
+    "description": "A basic Python and SQL connectivity program which helps the farmers.",
     "technologies": [
       "Python",
       "SQL",
-      "Machine Learning"
+      "Tkinter"
     ],
-    "startDate": "Jun 2024",
-    "endDate": "Oct 2024",
+    "startDate": "May 2020",
+    "endDate": "May 2020",
     "github": "https://github.com/Ashwin-Reddy/Project-KISAN"
   },
   {
-    "name": "AI Fitness Coach",
-    "description": "An intelligent fitness assistant for tracking and personalized guidance.",
+    "name": "My Portfolio Website",
+    "description": "My initial personal portfolio website, built to showcase my projects, skills and journey as a developer.",
     "technologies": [
-      "React Native",
-      "FastAPI",
-      "PostgreSQL"
+      "React.js",
+      "TypeScript",
+      "Tailwind CSS"
     ],
-    "startDate": "Jan 2025",
-    "endDate": "May 2025",
-    "github": "https://github.com/yourusername/ai-fitness-coach"
+    "startDate": "Sep 2026",
+    "endDate": "Sep 2026",
+    "github": "https://github.com/Ashwin-Reddy/Ashwin"
   }
 ]
