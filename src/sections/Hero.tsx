@@ -1,6 +1,30 @@
-import heroImage from "../assets/images/hero.png"
+import { useEffect, useState } from "react";
+import heroImage from "../assets/images/hero.png";
 
 const Hero = () => {
+    const fullText = "Hi, Ashwin here.";
+
+    const [displayText, setDisplayText] = useState("");
+
+    useEffect(() => {
+        let index = 0;
+
+        const typingInterval = setInterval(() => {
+            setDisplayText(fullText.slice(0, index + 1));
+            index++;
+
+            if (index === fullText.length) {
+                clearInterval(typingInterval);
+            }
+        }, 100);
+
+        return () => clearInterval(typingInterval);
+    }, []);
+
+    const beforeName = displayText.slice(0, 4);
+    const name = displayText.slice(4, 10);
+    const afterName = displayText.slice(10);
+
     return (
         <section
             id="home"
@@ -11,7 +35,26 @@ const Hero = () => {
                 {/* Text */}
                 <div className="w-1/2">
                     <h1 className="text-5xl font-medium tracking-tight md:text-6xl lg:text-7xl">
-                        Hi, <span className="text-[#64ffda]"> Ashwin</span> here.
+                        <span>{beforeName}</span>
+
+                        <span className="text-[#64ffda]">
+                            {name}
+                        </span>
+
+                        <span>{afterName}</span>
+
+                        {/* Blinking cursor */}
+                        <span
+                            className="
+                                ml-1
+                                inline-block
+                                h-[0.9em]
+                                w-[2px]
+                                translate-y-[0.08em]
+                                cursor-blink
+                                bg-[#CCD0CF]
+                            "
+                        />
                     </h1>
 
                     <p className="mt-8 max-w-xl text-base leading-8 text-[#9BA8AB] md:text-lg">
@@ -27,6 +70,7 @@ const Hero = () => {
                         className="h-130 max-w-md object-contain"
                     />
                 </div>
+
             </div>
         </section>
     );
