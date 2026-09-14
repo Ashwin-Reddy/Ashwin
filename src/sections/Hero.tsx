@@ -49,10 +49,10 @@ const Hero = () => {
                                 ml-1
                                 inline-block
                                 h-[0.9em]
-                                w-[2px]
+                                w-[4px]
                                 translate-y-[0.08em]
                                 cursor-blink
-                                bg-[#CCD0CF]
+                                bg-[#64ffda]
                             "
                         />
                     </h1>
