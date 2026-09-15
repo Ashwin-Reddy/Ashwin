@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import statsBackground from "../assets/images/stats-box.jpeg";
 
 const DevStats = () => {
     return (
@@ -6,7 +7,7 @@ const DevStats = () => {
             id="devstats"
             className="overflow-hidden px-6 py-32 md:py-40"
         >
-        
+
             {/* Section Heading */}
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
@@ -25,7 +26,7 @@ const DevStats = () => {
                     <div className="flex-1 border-t border-[#CCD0CF]/20" />
                 </div>
             </motion.div>
-            
+
 
             {/* Stats Glass Box */}
             <motion.div
@@ -38,17 +39,51 @@ const DevStats = () => {
                 }}
             >
                 <div className="mx-auto max-w-3xl">
+
                     <div
                         className="
+                            relative
+                            overflow-hidden
                             rounded-2xl
-                            border border-[#CCD0CF]/15
-                            bg-[#11212D]/45
+                            border border-[#CCD0CF]/20
                             px-8 py-10
-                            shadow-[0_8px_32px_rgba(0,0,0,0.15)]
-                            backdrop-blur-md
+                            shadow-[0_12px_40px_rgba(0,0,0,0.25)]
+                            backdrop-blur-xl
                             md:px-14 md:py-12
                         "
                     >
+
+                        {/* Background Image */}
+                        <div
+                            className="
+                                absolute
+                                inset-0
+                                -z-20
+                                scale-105
+                                bg-cover
+                                bg-center
+                                opacity-40
+                                blur-[2px]
+                            "
+                            style={{
+                                backgroundImage: `url(${statsBackground})`,
+                            }}
+                        />
+
+                        {/* Glass Overlay */}
+                        <div
+                            className="
+                                absolute
+                                inset-0
+                                -z-10
+                                bg-gradient-to-br
+                                from-[#06141B]/80
+                                via-[#06141B]/55
+                                to-[#06141B]/70
+                                backdrop-blur-md
+                            "
+                        />
+
                         {/* Box Header */}
                         <div className="mb-8 border-b border-[#CCD0CF]/10 pb-5">
                             <h3 className="text-center text-lg font-semibold tracking-widest text-[#CCD0CF] md:text-xl">
@@ -59,36 +94,52 @@ const DevStats = () => {
                         {/* Stats */}
                         <div className="space-y-5 text-base text-[#9BA8AB] md:space-y-6 md:text-lg">
 
+                            {/* Projects */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>PROJECTS BUILT</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
-                                <span className="font-medium text-[#CCD0CF]">07</span>
+                                <span className="font-medium text-[#CCD0CF]">
+                                    07
+                                </span>
                             </div>
 
+                            {/* Languages */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>LANGUAGES USED</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
-                                <span className="font-medium text-[#CCD0CF]">08</span>
+                                <span className="font-medium text-[#CCD0CF]">
+                                    08
+                                </span>
                             </div>
 
+                            {/* Coffee */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>COFFEE CONSUMED</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
-                                <span className="font-medium text-[#CCD0CF]">∞</span>
+                                <span className="font-medium text-[#CCD0CF]">
+                                    ∞
+                                </span>
                             </div>
 
+                            {/* LeetCode */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>LEETCODE VISITS</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
-                                <span className="font-medium text-[#CCD0CF]">Lost Track</span>
+                                <span className="font-medium text-[#CCD0CF]">
+                                    Lost Track
+                                </span>
                             </div>
 
+                            {/* Bugs Created */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>BUGS CREATED</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
-                                <span className="font-medium text-[#CCD0CF]">???</span>
+                                <span className="font-medium text-[#CCD0CF]">
+                                    ???
+                                </span>
                             </div>
 
+                            {/* Bugs Fixed */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>BUGS FIXED</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
@@ -97,6 +148,7 @@ const DevStats = () => {
                                 </span>
                             </div>
 
+                            {/* Current Status */}
                             <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
                                 <span>CURRENT STATUS</span>
                                 <span className="text-[#CCD0CF]/50">:</span>
@@ -109,7 +161,7 @@ const DevStats = () => {
                     </div>
                 </div>
             </motion.div>
-            
+
         </section>
     );
 };
