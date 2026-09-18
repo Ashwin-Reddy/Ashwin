@@ -115,13 +115,23 @@ const Projects = () => {
       className="overflow-hidden px-6 py-32 md:py-40"
     >
       {/* Section heading */}
-      <div className="mx-auto mb-14 flex max-w-6xl items-center gap-5">
-        <h2 className="whitespace-nowrap text-3xl font-semibold tracking-tight md:text-4xl">
-          / projects
-        </h2>
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{
+            duration: 0.8,
+            ease: "easeOut",
+        }}
+      >
+        <div className="mx-auto mb-14 flex max-w-6xl items-center gap-5">
+          <h2 className="whitespace-nowrap text-3xl font-semibold tracking-tight md:text-4xl">
+            / projects
+          </h2>
 
-        <div className="flex-1 border-t border-[#CCD0CF]/20" />
-      </div>
+          <div className="flex-1 border-t border-[#CCD0CF]/20" />
+        </div>
+      </motion.div>
 
       {/* Coverflow container */}
       <div className="relative mx-auto max-w-7xl">
