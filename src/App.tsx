@@ -16,9 +16,9 @@ function App() {
 
       <About />
 
-      <DevStats />
-
       <Projects />
+
+      <DevStats />
 
       <Footer />
 
