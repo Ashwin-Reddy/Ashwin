@@ -4,8 +4,8 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 const sections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "devstats", label: "Stats" },
   { id: "projects", label: "Projects" },
+  { id: "devstats", label: "Stats" },
 ];
 
 const Navbar = () => {
