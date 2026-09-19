@@ -130,6 +130,22 @@ const Projects = () => {
           </h2>
 
           <div className="flex-1 border-t border-[#CCD0CF]/20" />
+
+          <a
+            href="https://github.com/Ashwin-Reddy?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              inline-flex
+              w-fit
+              items-center
+              gap-2
+              text-sm
+              text-[#64FFDD]
+              hover:text-[#CCD0CF]"
+          >
+            View all projects <ArrowRight size={15} />
+          </a>
         </div>
       </motion.div>
 
