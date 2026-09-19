@@ -147,12 +147,14 @@ const Navbar = () => {
         </div>
 
         {/* Social Links */}
-        <div className="flex items-center gap-5">
+        <div className="text-[#64FFDD] flex items-center gap-5">
 
           <a
             href="mailto:ashwindeepak.official@gmail.com"
             aria-label="Email"
-            className="transition-opacity hover:opacity-60"
+            className="
+              transition-opacity
+              hover:text-[#CCD0CF]"
           >
             <FaEnvelope size={18} />
           </a>
@@ -162,7 +164,9 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="transition-opacity hover:opacity-60"
+            className="
+              transition-opacity
+              hover:text-[#CCD0CF]"
           >
             <FaGithub size={18} />
           </a>
@@ -172,7 +176,9 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="transition-opacity hover:opacity-60"
+            className="
+              transition-opacity
+              hover:text-[#CCD0CF]"
           >
             <FaLinkedin size={18} />
           </a>

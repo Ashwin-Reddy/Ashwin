@@ -330,7 +330,7 @@ const Projects = () => {
                         items-center
                         gap-2
                         text-sm
-                        text-[#9BA8AB]
+                        text-[#64FFDD]
                         transition-colors
                         duration-300
                         hover:text-[#CCD0CF]
