@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import heroBackground from "../assets/images/hero-background.webp";
 
 const Hero = () => {
     const fullText = "Hi, Ashwin here.";
@@ -27,9 +28,21 @@ const Hero = () => {
     return (
         <section
             id="home"
-            className="min-h-[calc(100vh-80px)] px-6"
+            className="relative min-h-[calc(100vh-80px)] overflow-hidden px-6"
         >
-            <div className="mx-auto flex min-h-[calc(110vh-80px)] max-w-7xl items-center justify-center">
+            {/* Hero Background */}
+            <div
+                className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+                style={{
+                    backgroundImage: `url(${heroBackground})`,
+                }}
+            />
+
+            {/* Readability Overlay */}
+            <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#06141B]/25 via-[#06141B]/45 to-[#06141B]" />
+
+            {/* Hero Content */}
+            <div className="relative z-10 mx-auto flex min-h-[calc(110vh-80px)] max-w-7xl items-center justify-center">
 
                 {/* Text */}
                 <div className="w-full text-center">
@@ -57,11 +70,17 @@ const Hero = () => {
                     </h1>
 
                     <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-[#9BA8AB] md:text-lg">
-                        Software engineer from India. I turn caffeine, curiosity, questionable ideas and terminal addiction into working software. Usually, it becomes a useful product. The rest becomes very educational bugs.
+                        Software engineer from India. I turn caffeine, curiosity,
+                        questionable ideas and terminal addiction into working software.
+                        Usually, it becomes a useful product. The rest becomes very
+                        educational bugs.
                     </p>
                 </div>
 
             </div>
+
+            {/* Bottom Fade */}
+            <div className="absolute inset-x-0 bottom-0 z-[2] h-32 bg-gradient-to-t from-[#06141B] to-transparent" />
         </section>
     );
 };

@@ -1,11 +1,11 @@
 import Navbar from "./components/Navbar";
+import SplashCursor from "./components/SplashCursor";
 
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Projects from "./sections/Projects";
 import DevStats from "./sections/DevStats";
 import Footer from "./components/Footer";
-import SplashCursor from "./components/SplashCursor";
 
 function App() {
   return (
