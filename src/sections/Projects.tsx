@@ -19,11 +19,32 @@ type Project = {
 
 const typedProjects = projects as Project[];
 
-const CARD_WIDTH = 336;
+const DESKTOP_CARD_WIDTH = 336;
 const AUTO_SCROLL_INTERVAL = 5000;
 
 const Projects = () => {
   const projectCount = typedProjects.length;
+
+  /*
+   * Track viewport width so the carousel geometry
+   * can adapt on mobile.
+   */
+  const [viewportWidth, setViewportWidth] =
+    useState(() =>
+      typeof window !== "undefined"
+        ? window.innerWidth
+        : 1024
+    );
+
+  const isMobile = viewportWidth < 768;
+
+  /*
+   * Mobile cards are sized according to the
+   * available viewport so they never overflow.
+   */
+  const cardWidth = isMobile
+    ? Math.min(310, viewportWidth - 48)
+    : DESKTOP_CARD_WIDTH;
 
   /*
    * Three copies allow us to create an infinite carousel:
@@ -38,48 +59,77 @@ const Projects = () => {
     ...typedProjects,
   ];
 
-  const [activeIndex, setActiveIndex] = useState(projectCount);
-  const [isResetting, setIsResetting] = useState(false);
+  const [activeIndex, setActiveIndex] =
+    useState(projectCount);
 
-  /*
-   * Move to next project.
-   */
+  const [isResetting, setIsResetting] =
+    useState(false);
+
+  /* Keep viewport width updated. */
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () => {
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, []);
+
+  /* Move to next project. */
   const nextProject = () => {
-    setActiveIndex((current) => current + 1);
+    setActiveIndex(
+      (current) => current + 1
+    );
   };
 
-  /*
-   * Move to previous project.
-   */
+  /* Move to previous project. */
   const previousProject = () => {
-    setActiveIndex((current) => current - 1);
+    setActiveIndex(
+      (current) => current - 1
+    );
   };
 
-  /*
-   * Automatic scrolling.
-   */
+  /* Automatic scrolling. */
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((current) => current + 1);
+      setActiveIndex(
+        (current) => current + 1
+      );
     }, AUTO_SCROLL_INTERVAL);
 
-    return () => clearInterval(interval);
+    return () =>
+      clearInterval(interval);
   }, []);
 
   /*
-   * Infinite carousel reset.
-   *
    * Once we move into the third copy,
    * silently jump back to the middle copy.
    */
   useEffect(() => {
-    if (activeIndex >= projectCount * 2) {
+    if (
+      activeIndex >=
+      projectCount * 2
+    ) {
       const timeout = setTimeout(() => {
         setIsResetting(true);
-        setActiveIndex((current) => current - projectCount);
+
+        setActiveIndex(
+          (current) =>
+            current - projectCount
+        );
       }, 550);
 
-      return () => clearTimeout(timeout);
+      return () =>
+        clearTimeout(timeout);
     }
 
     /*
@@ -88,12 +138,20 @@ const Projects = () => {
     if (activeIndex < projectCount) {
       const timeout = setTimeout(() => {
         setIsResetting(true);
-        setActiveIndex((current) => current + projectCount);
+
+        setActiveIndex(
+          (current) =>
+            current + projectCount
+        );
       }, 550);
 
-      return () => clearTimeout(timeout);
+      return () =>
+        clearTimeout(timeout);
     }
-  }, [activeIndex, projectCount]);
+  }, [
+    activeIndex,
+    projectCount,
+  ]);
 
   /*
    * Turn animations back on after
@@ -106,30 +164,82 @@ const Projects = () => {
       setIsResetting(false);
     }, 50);
 
-    return () => clearTimeout(timeout);
+    return () =>
+      clearTimeout(timeout);
   }, [isResetting]);
 
   return (
     <section
       id="projects"
-      className="overflow-hidden px-6 py-32 md:py-40"
+      className="
+        overflow-hidden
+        px-4
+        py-20
+
+        sm:px-6
+        sm:py-24
+
+        md:py-40
+      "
     >
-      {/* Section heading */}
+
+      {/* Section Heading */}
+
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
+        initial={{
+          opacity: 0,
+          x: -50,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.25,
+        }}
         transition={{
-            duration: 0.8,
-            ease: "easeOut",
+          duration: 0.8,
+          ease: "easeOut",
         }}
       >
-        <div className="mx-auto mb-14 flex max-w-6xl items-center gap-5">
-          <h2 className="whitespace-nowrap text-3xl font-semibold tracking-tight md:text-4xl">
+        <div
+          className="
+            mx-auto
+            mb-10
+            flex
+            max-w-6xl
+            items-center
+            gap-3
+
+            sm:mb-12
+            sm:gap-5
+
+            md:mb-14
+          "
+        >
+
+          <h2
+            className="
+              whitespace-nowrap
+              text-2xl
+              font-semibold
+              tracking-tight
+
+              sm:text-3xl
+              md:text-4xl
+            "
+          >
             / projects
           </h2>
 
-          <div className="flex-1 border-t border-[#CCD0CF]/20" />
+          <div
+            className="
+              flex-1
+              border-t
+              border-[#CCD0CF]/20
+            "
+          />
 
           <a
             href="https://github.com/Ashwin-Reddy?tab=repositories"
@@ -138,40 +248,70 @@ const Projects = () => {
             className="
               inline-flex
               w-fit
+              shrink-0
               items-center
-              gap-2
-              text-sm
+              gap-1
+              text-xs
               text-[#64FFDD]
-              hover:text-[#CCD0CF]"
+              transition-colors
+              hover:text-[#CCD0CF]
+
+              sm:gap-2
+              sm:text-sm
+            "
           >
-            View all projects <ArrowRight size={15} />
+            View all projects
+            <ArrowRight size={14} />
           </a>
+
         </div>
       </motion.div>
 
-      {/* Coverflow container */}
-      <div className="relative mx-auto max-w-7xl">
 
-        {/* Carousel viewport */}
+      {/* Coverflow Container */}
+
+      <div
+        className="
+          relative
+          mx-auto
+          max-w-7xl
+        "
+      >
+
+        {/* Carousel Viewport */}
         <div
           className="
             relative
-            h-[390px]
+            h-[350px]
             overflow-visible
+
+            sm:h-[370px]
+
+            md:h-[390px]
             [perspective:1200px]
           "
         >
+
           <motion.div
             className="
               absolute
               left-1/2
               top-1/2
               flex
-              h-[350px]
+              h-[330px]
               items-center
+
+              sm:h-[340px]
+
+              md:h-[350px]
             "
             animate={{
-              x: `calc(-${activeIndex * CARD_WIDTH}px - ${CARD_WIDTH / 2}px)`,
+              x: `calc(-${
+                activeIndex * cardWidth
+              }px - ${
+                cardWidth / 2
+              }px)`,
+
               y: "-50%",
             }}
             transition={
@@ -179,187 +319,329 @@ const Projects = () => {
                 ? { duration: 0 }
                 : {
                     duration: 0.55,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [
+                      0.22,
+                      1,
+                      0.36,
+                      1,
+                    ],
                   }
             }
             style={{
-              transformStyle: "preserve-3d",
+              transformStyle:
+                "preserve-3d",
             }}
           >
-            {extendedProjects.map((project, index) => {
-              const distance = index - activeIndex;
-              const absoluteDistance = Math.abs(distance);
 
-              /*
-               * How far the card is from the center.
-               */
-              const isActive = distance === 0;
+            {extendedProjects.map(
+              (project, index) => {
+                const distance =
+                  index - activeIndex;
 
-              /*
-               * Cards move closer together as they
-               * move away from the center.
-               */
-              const sideOffset = distance * -125;
+                const absoluteDistance =
+                  Math.abs(distance);
 
-              /*
-               * Rotate cards inward.
-               */
-              const rotateY = distance * -32;
+                /*
+                 * Active card.
+                 */
+                const isActive =
+                  distance === 0;
 
-              /*
-               * Make side cards slightly smaller.
-               */
-              const scale = Math.max(
-                0.78,
-                1 - absoluteDistance * 0.08
-              );
+                const sideOffset =
+                  distance *
+                  (isMobile
+                    ? -70
+                    : -125);
 
-              /*
-               * Fade cards as they move away
-               * from the center.
-               */
-              const opacity = Math.max(
-                0.2,
-                1 - absoluteDistance * 0.18
-              );
+                /*
+                 * Softer rotation on mobile.
+                 */
+                const rotateY =
+                  distance *
+                  (isMobile
+                    ? -15
+                    : -32);
 
-              /* Blur inactive cards */
-              const blur = Math.min(
-                absoluteDistance * 2,
-                6
-              )
+                /*
+                 * Keep the active card dominant.
+                 */
+                const scale = Math.max(
+                  isMobile
+                    ? 0.88
+                    : 0.78,
+                  1 -
+                    absoluteDistance *
+                      (isMobile
+                        ? 0.06
+                        : 0.08)
+                );
 
-              /*
-               * Keep cards closer to the front
-               * when they are near the center.
-               */
-              const zIndex = 20 - absoluteDistance;
+                /*
+                 * Side cards become subtle,
+                 * especially on mobile.
+                 */
+                const opacity =
+                  Math.max(
+                    isMobile
+                      ? 0.3
+                      : 0.2,
+                    1 -
+                      absoluteDistance *
+                        (isMobile
+                          ? 0.22
+                          : 0.18)
+                  );
 
-              return (
-                <motion.div
-                  key={`${project.name}-${index}`}
-                  className="
-                    absolute
-                    left-0
-                    top-0
-                    w-[336px]
-                  "
-                  animate={{
-                    x: index * CARD_WIDTH + sideOffset,
-                    scale,
-                    opacity,
-                    rotateY,
-                    zIndex,
-                    filter: `blur(${blur}px)`,
-                  }}
-                  transition={
-                    isResetting
-                      ? { duration: 0 }
-                      : {
-                          duration: 0.55,
-                          ease: [0.22, 1, 0.36, 1],
-                        }
-                  }
-                  style={{
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  <div
-                    className={`
-                      flex h-[350px] flex-col
-                      rounded-2xl border p-7
-                      transition-colors duration-500
-                      ${
-                        isActive
-                          ? "border-[#CCD0CF]/60 bg-[#11212D]"
-                          : "border-[#CCD0CF]/10 bg-[#11212D]"
-                      }
-                    `}
+                /*
+                 * Reduce blur on mobile so
+                 * neighboring cards don't
+                 * disappear completely.
+                 */
+                const blur = Math.min(
+                  absoluteDistance *
+                    (isMobile ? 1.5 : 2),
+                  isMobile ? 4 : 6
+                );
+
+                /*
+                 * Active card stays above
+                 * surrounding cards.
+                 */
+                const zIndex =
+                  20 -
+                  absoluteDistance;
+
+                return (
+                  <motion.div
+                    key={`${project.name}-${index}`}
+                    className="
+                      absolute
+                      left-0
+                      top-0
+                    "
+                    style={{
+                      width: `${cardWidth}px`,
+                      transformStyle:
+                        "preserve-3d",
+                    }}
+                    animate={{
+                      x:
+                        index *
+                          cardWidth +
+                        sideOffset,
+
+                      scale,
+                      opacity,
+                      rotateY,
+                      zIndex,
+
+                      filter: `blur(${blur}px)`,
+                    }}
+                    transition={
+                      isResetting
+                        ? { duration: 0 }
+                        : {
+                            duration: 0.55,
+                            ease: [
+                              0.22,
+                              1,
+                              0.36,
+                              1,
+                            ],
+                          }
+                    }
                   >
 
-                    {/* Project name */}
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-xl font-semibold leading-snug text-[#CCD0CF]">
-                        {project.name}
-                      </h3>
-                    </div>
+                    {/* Project Card */}
+                    <div
+                      className={`
+                        flex
+                        h-[330px]
+                        flex-col
+                        rounded-2xl
+                        border
+                        p-5
+                        transition-colors
+                        duration-500
 
-                    {/* Date */}
-                    <div className="shrink-0 text-right text-xs leading-5 text-[#9BA8AB]">
-                      <div>
-                        {project.startDate} - {project.endDate}
-                      </div>
-                    </div>
+                        sm:h-[340px]
+                        sm:p-6
 
-                    {/* Description */}
-                    <p
-                      className="mt-5 text-sm leading-6 text-[#9BA8AB]"
-                      title={project.description}
+                        md:h-[350px]
+                        md:p-7
+
+                        ${
+                          isActive
+                            ? `
+                              border-[#CCD0CF]/60
+                              bg-[#11212D]
+                            `
+                            : `
+                              border-[#CCD0CF]/10
+                              bg-[#11212D]
+                            `
+                        }
+                      `}
                     >
-                      {project.description}
-                    </p>
 
-                    {/* Technologies */}
-                    <div className="mt-10 flex flex-wrap gap-2">
-                      {project.technologies.map((technology) => (
-                        <span
-                          key={technology}
+                      {/* Project Name + Date */}
+                      <div
+                        className="
+                          flex
+                          items-start
+                          justify-between
+                          gap-3
+                        "
+                      >
+
+                        <h3
                           className="
-                            rounded-full
-                            border border-[#CCD0CF]/10
-                            px-3 py-1.5
-                            text-xs text-[#9BA8AB]
+                            text-lg
+                            font-semibold
+                            leading-snug
+                            text-[#CCD0CF]
+
+                            sm:text-xl
                           "
                         >
-                          {technology}
-                        </span>
-                      ))}
+                          {project.name}
+                        </h3>
+
+                        <div
+                          className="
+                            shrink-0
+                            text-right
+                            text-[10px]
+                            leading-5
+                            text-[#9BA8AB]
+
+                            sm:text-xs
+                          "
+                        >
+                          <div>
+                            {project.startDate}
+                            {" - "}
+                            {project.endDate}
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                      {/* Description */}
+                      <p
+                        className="
+                          mt-4
+                          text-xs
+                          leading-6
+                          text-[#9BA8AB]
+
+                          sm:mt-5
+                          sm:text-sm
+                        "
+                        title={
+                          project.description
+                        }
+                      >
+                        {project.description}
+                      </p>
+
+
+                      {/* Technologies */}
+                      <div
+                        className="
+                          mt-7
+                          flex
+                          flex-wrap
+                          gap-1.5
+
+                          sm:mt-10
+                          sm:gap-2
+                        "
+                      >
+                        {project.technologies.map(
+                          (technology) => (
+                            <span
+                              key={
+                                technology
+                              }
+                              className="
+                                rounded-full
+                                border
+                                border-[#CCD0CF]/10
+                                px-2.5
+                                py-1
+                                text-[10px]
+                                text-[#9BA8AB]
+
+                                sm:px-3
+                                sm:py-1.5
+                                sm:text-xs
+                              "
+                            >
+                              {technology}
+                            </span>
+                          )
+                        )}
+                      </div>
+
+
+                      {/* Push link to bottom */}
+                      <div className="flex-1" />
+
+
+                      {/* GitHub */}
+                      <a
+                        href={
+                          project.github
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          inline-flex
+                          w-fit
+                          items-center
+                          gap-2
+                          text-xs
+                          text-[#64FFDD]
+                          transition-colors
+                          duration-300
+                          hover:text-[#CCD0CF]
+
+                          sm:text-sm
+                        "
+                      >
+                        <ExternalLink
+                          size={15}
+                        />
+
+                        View Project
+                      </a>
+
                     </div>
+                  </motion.div>
+                );
+              }
+            )}
 
-                    {/* Push link to bottom */}
-                    <div className="flex-1" />
-
-                    {/* GitHub */}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="
-                        inline-flex
-                        w-fit
-                        items-center
-                        gap-2
-                        text-sm
-                        text-[#64FFDD]
-                        transition-colors
-                        duration-300
-                        hover:text-[#CCD0CF]
-                      "
-                    >
-                      <ExternalLink size={16} />
-                      View Project
-                    </a>
-
-                  </div>
-                </motion.div>
-              );
-            })}
           </motion.div>
         </div>
 
-        {/* Previous button */}
+
+        {/* Previous Button */}
+
         <button
           type="button"
           onClick={previousProject}
           aria-label="Previous project"
           className="
             absolute
-            left-2
+            left-1
             top-1/2
             z-30
             flex
-            h-11
-            w-11
+            h-10
+            w-10
             -translate-y-1/2
             items-center
             justify-center
@@ -373,25 +655,32 @@ const Projects = () => {
             hover:border-[#CCD0CF]/50
             hover:bg-[#CCD0CF]
             hover:text-[#06141B]
+
+            sm:left-2
+            sm:h-11
+            sm:w-11
+
             md:left-4
           "
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={17} />
         </button>
 
-        {/* Next button */}
+
+        {/* Next Button */}
+
         <button
           type="button"
           onClick={nextProject}
           aria-label="Next project"
           className="
             absolute
-            right-2
+            right-1
             top-1/2
             z-30
             flex
-            h-11
-            w-11
+            h-10
+            w-10
             -translate-y-1/2
             items-center
             justify-center
@@ -405,13 +694,19 @@ const Projects = () => {
             hover:border-[#CCD0CF]/50
             hover:bg-[#CCD0CF]
             hover:text-[#06141B]
+
+            sm:right-2
+            sm:h-11
+            sm:w-11
+
             md:right-4
           "
         >
-          <ArrowRight size={18} />
+          <ArrowRight size={17} />
         </button>
 
       </div>
+
     </section>
   );
 };
