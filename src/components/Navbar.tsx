@@ -29,12 +29,7 @@ const Navbar = () => {
             const scrollY = window.scrollY;
 
             /*
-             * ------------------------------------------------
              * Sticky Navbar
-             * ------------------------------------------------
-             *
-             * The navbar becomes sticky when the About
-             * section reaches the top of the viewport.
              */
             const aboutSection =
                 document.getElementById("about");
@@ -47,26 +42,13 @@ const Navbar = () => {
             }
 
             /*
-             * ------------------------------------------------
              * Active Section
-             * ------------------------------------------------
-             *
-             * When we're at the very top of the page,
-             * Home should always be active.
              */
             if (scrollY < 100) {
                 setActiveSection("home");
                 return;
             }
 
-            /*
-             * Reference point used to determine which
-             * section is currently active.
-             *
-             * 35% down the viewport works well for this
-             * portfolio because it avoids changing the
-             * active section too early.
-             */
             const referencePoint =
                 scrollY +
                 window.innerHeight * 0.35;
@@ -84,19 +66,10 @@ const Navbar = () => {
                     return;
                 }
 
-                /*
-                 * Get the absolute position of the
-                 * section's top edge.
-                 */
                 const sectionTop =
                     element.getBoundingClientRect().top +
                     scrollY;
 
-                /*
-                 * If the section has reached our
-                 * reference point, it becomes a
-                 * candidate for the active section.
-                 */
                 if (
                     sectionTop <=
                         referencePoint &&
@@ -116,10 +89,6 @@ const Navbar = () => {
             );
         };
 
-        /*
-         * Run once immediately so the navbar has
-         * the correct state when the page loads.
-         */
         handleScroll();
 
         window.addEventListener(
