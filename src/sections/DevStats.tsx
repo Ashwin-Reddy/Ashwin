@@ -13,7 +13,10 @@ const DevStats = () => {
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{
+                    once: true,
+                    amount: 0.25,
+                }}
                 transition={{
                     duration: 0.8,
                     ease: "easeOut",
@@ -30,9 +33,18 @@ const DevStats = () => {
 
             {/* Stats Glass Box */}
             <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
+                initial={{
+                    opacity: 0,
+                    x: 50,
+                }}
+                whileInView={{
+                    opacity: 1,
+                    x: 0,
+                }}
+                viewport={{
+                    once: true,
+                    amount: 0.25,
+                }}
                 transition={{
                     duration: 0.8,
                     ease: "easeOut",
@@ -45,11 +57,15 @@ const DevStats = () => {
                         glowColor="175 80 65"
                         backgroundColor="#06141B"
                         borderRadius={0}
-                        glowRadius={38}
-                        glowIntensity={1.65}
+                        glowRadius={35}
+                        glowIntensity={1.8}
                         coneSpread={30}
                         animated={false}
-                        colors={["#64FFDD", "#1C7A82", "#0B3D46"]}
+                        colors={[
+                            "#64FFDD",
+                            "#1C7A82",
+                            "#0B3D46",
+                        ]}
                         fillOpacity={0.35}
                     >
                         <div
@@ -107,8 +123,14 @@ const DevStats = () => {
 
                                 {/* Projects */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>PROJECTS BUILT</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        PROJECTS BUILT
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         07
                                     </span>
@@ -116,8 +138,14 @@ const DevStats = () => {
 
                                 {/* Languages */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>LANGUAGES USED</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        LANGUAGES USED
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         08
                                     </span>
@@ -125,8 +153,14 @@ const DevStats = () => {
 
                                 {/* Coffee */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>COFFEE CONSUMED</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        COFFEE CONSUMED
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         ∞
                                     </span>
@@ -134,8 +168,14 @@ const DevStats = () => {
 
                                 {/* LeetCode */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>LEETCODE VISITS</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        LEETCODE VISITS
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         Lost Track
                                     </span>
@@ -143,8 +183,14 @@ const DevStats = () => {
 
                                 {/* Bugs Created */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>BUGS CREATED</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        BUGS CREATED
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         ???
                                     </span>
@@ -152,8 +198,14 @@ const DevStats = () => {
 
                                 {/* Bugs Fixed */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>BUGS FIXED</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        BUGS FIXED
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#CCD0CF]">
                                         Eventually
                                     </span>
@@ -161,8 +213,14 @@ const DevStats = () => {
 
                                 {/* Current Status */}
                                 <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 md:grid-cols-[220px_24px_1fr]">
-                                    <span>CURRENT STATUS</span>
-                                    <span className="text-[#CCD0CF]/50">:</span>
+                                    <span>
+                                        CURRENT STATUS
+                                    </span>
+
+                                    <span className="text-[#CCD0CF]/50">
+                                        :
+                                    </span>
+
                                     <span className="font-medium text-[#64FFDD]">
                                         BUILDING
                                     </span>
